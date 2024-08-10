@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import AuthProvider from "@/provider/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="id">
+      <head>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+      </head>
+      <body className={manrope.className}>
+        <AuthProvider>
+          <Toaster richColors position="top-right" theme="light" />
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
