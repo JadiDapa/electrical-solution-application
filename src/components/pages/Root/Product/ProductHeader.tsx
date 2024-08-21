@@ -30,15 +30,13 @@ export default function ProductHeader() {
         amet consectetur adipisicing.
       </p>
       <div className="mx-auto flex max-w-fit flex-col items-center gap-6 lg:flex-row">
-        <Link href={"/tentang/profil"}>
+        <Link href="/products#asset-management">
           <Button className="rounded-full border border-transparent px-6 transition hover:border-primary hover:bg-transparent hover:text-primary">
             Assets Management
           </Button>
         </Link>
         <Link
-          href={
-            "https://docs.google.com/forms/d/e/1FAIpQLSffNLK713o58R2V_0Rh2pTtyyXzWeBahR1Oj_gxmztWRomzpA/viewform"
-          }
+          href="/products#build-electrical-installation"
           className="font-medium text-primary"
         >
           <Button

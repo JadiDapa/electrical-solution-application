@@ -44,6 +44,34 @@ const contactCardContent = [
   },
 ];
 
+const socialMediaData = [
+  {
+    name: "Instagram",
+    Icon: FaInstagram,
+    handle: "@haleyorapower",
+  },
+  {
+    name: "Twitter/X",
+    Icon: FaXTwitter,
+    handle: "pthaleyorapower",
+  },
+  {
+    name: "Facebook",
+    Icon: FaFacebookF,
+    handle: "PT Haleyora Power",
+  },
+  {
+    name: "Linked In",
+    Icon: FaLinkedin,
+    handle: "pt-haleyora-power",
+  },
+  {
+    name: "Youtube",
+    Icon: FaYoutube,
+    handle: "pthaleyorapower_id",
+  },
+];
+
 export default function ContactInfo() {
   return (
     <section
@@ -68,65 +96,25 @@ export default function ContactInfo() {
             out
           </p>
         </div>
-        <div className="flex justify-between">
-          <div className="flex-[2] space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="grid size-14 place-items-center rounded-lg bg-primary text-background">
-                <FaInstagram className="size-8" />
+        <div className="flex flex-col justify-between gap-6 lg:flex-row lg:gap-0">
+          <div className="order-2 mx-auto flex-[2] space-y-4 lg:order-1 lg:mx-0 lg:space-y-6">
+            {socialMediaData.map((social, index) => (
+              <div key={index} className="flex items-center gap-3">
+                <div className="grid size-10 place-items-center rounded-lg bg-primary text-background lg:size-14">
+                  <social.Icon className="size-6 lg:size-8" />
+                </div>
+                <div>
+                  <p className="font-medium text-background lg:text-lg">
+                    {social.name}
+                  </p>
+                  <p className="text-lg font-semibold text-primary lg:text-xl">
+                    {social.handle}
+                  </p>
+                </div>
               </div>
-              <div className="">
-                <p className="text-lg font-medium text-background">Instagram</p>
-                <p className="text-xl font-semibold text-primary">
-                  @haleyorapower
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="grid size-14 place-items-center rounded-lg bg-primary text-background">
-                <FaXTwitter className="size-8" />
-              </div>
-              <div className="">
-                <p className="text-lg font-medium text-background">Twitter/X</p>
-                <p className="text-xl font-semibold text-primary">
-                  pthaleyorapower
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="grid size-14 place-items-center rounded-lg bg-primary text-background">
-                <FaFacebookF className="size-8" />
-              </div>
-              <div className="">
-                <p className="text-lg font-medium text-background">Facebook</p>
-                <p className="text-xl font-semibold text-primary">
-                  PT Haleyora Power
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="grid size-14 place-items-center rounded-lg bg-primary text-background">
-                <FaLinkedin className="size-8" />
-              </div>
-              <div className="">
-                <p className="text-lg font-medium text-background">Linked In</p>
-                <p className="text-xl font-semibold text-primary">
-                  pt-haleyora-power
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="grid size-14 place-items-center rounded-lg bg-primary text-background">
-                <FaYoutube className="size-8" />
-              </div>
-              <div className="">
-                <p className="text-lg font-medium text-background">Youtube</p>
-                <p className="text-xl font-semibold text-primary">
-                  pthaleyorapower_id
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
-          <div className="flex flex-[3] justify-end gap-6 text-slate-800">
+          <div className="order-1 flex flex-[3] flex-col justify-end gap-6 text-slate-800 lg:order-2 lg:flex-row">
             {contactCardContent.map((contact, index) => (
               <ContactCard
                 index={index}

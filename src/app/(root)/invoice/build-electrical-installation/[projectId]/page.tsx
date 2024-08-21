@@ -44,17 +44,17 @@ export default async function Invoice({
   return (
     <section
       id="invoice"
-      className="relative w-full space-y-6 bg-primary/5 px-6 py-32 lg:px-24"
+      className="relative w-full space-y-6 overflow-auto bg-primary/5 px-2 py-32 lg:px-6"
     >
       <div className="flex items-center gap-3 text-2xl">
         <ArrowLeftCircle />
         Back
       </div>
-      <h1 className="mx-auto max-w-fit border-b-4 border-primary ps-3 text-4xl font-bold text-foreground">
+      <h1 className="max-w-fit border-b-4 border-primary ps-3 text-2xl font-bold text-foreground md:text-3xl lg:mx-auto lg:text-4xl">
         Estimasi Pembayaran - Invoice
       </h1>
       {project && (
-        <div className="mx-auto min-h-[900px] w-[1200px] space-y-12 bg-white p-12">
+        <div className="m mx-auto aspect-[9/12] w-[1200px] origin-top-left scale-[29%] space-y-12 bg-white p-12 sm:scale-[53%] md:scale-[65%] lg:scale-[85%] xl:scale-100">
           <figure className="relative h-16 w-64">
             <Image
               src="/images/logo-pln-hp.png"

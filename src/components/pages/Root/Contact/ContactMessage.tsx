@@ -11,7 +11,7 @@ export default function SendMessage() {
       className="space-y-12 bg-primary/5 px-6 py-12 lg:px-24 lg:py-24"
     >
       <div className="flex flex-col items-center gap-12 space-y-3 lg:flex-row lg:gap-28">
-        <div className="space-y-6">
+        <div className="flex-[1] space-y-6">
           <h1 className="max-w-lg text-4xl font-semibold">
             Or you can <span className="text-primary">directly</span> sent
             message to us
@@ -54,8 +54,8 @@ export default function SendMessage() {
             </Button>
           </div>
         </div>
-        <div className="">
-          <figure className="relative z-30 aspect-video w-[600px] overflow-hidden">
+        <div className="flex-[1]">
+          <figure className="relative z-30 aspect-video w-[80vw] overflow-hidden lg:w-[600px]">
             <Image
               src="/images/map.png"
               alt="Map area operaional"

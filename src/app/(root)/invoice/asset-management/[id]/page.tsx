@@ -33,11 +33,11 @@ export default async function Invoice({ params }: { params: { id: string } }) {
         <ArrowLeftCircle />
         Back
       </div>
-      <h1 className="mx-auto max-w-fit border-b-4 border-primary ps-3 text-4xl font-bold text-foreground">
+      <h1 className="max-w-fit border-b-4 border-primary ps-3 text-2xl font-bold text-foreground md:text-3xl lg:mx-auto lg:text-4xl">
         Estimasi Pembayaran - Invoice
       </h1>
-      <div className="mx-auto aspect-[1/1.4] w-2/3 space-y-12 bg-white px-12 py-24">
-        <figure className="relative h-8 w-12 lg:h-14 lg:w-48">
+      <div className="mx-auto aspect-[1/1.4] w-[800px] origin-top-left scale-[40%] space-y-12 bg-white px-12 py-24 sm:scale-[60%] md:scale-[80%] lg:scale-100">
+        <figure className="relative h-14 w-48">
           <Image
             src="/images/logo-pln-hp.png"
             alt="Logo"

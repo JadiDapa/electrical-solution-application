@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import OfferSections from "./OfferSections";
 import { getOfferSectionByProjectId } from "@/lib/network/offer-section";
 import CreateOfferSection from "./CreateOfferSection";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 interface OfferMaterialSelectionProps {
   projectId: string;
@@ -29,8 +30,8 @@ export default function OfferMaterialSelection({
 
   if (materialVariants && offerSections) {
     return (
-      <div className="w-full items-center space-y-6 rounded-lg border-2 border-dashed p-6">
-        <h3 className="text-2xl font-semibold text-primary">
+      <ScrollArea className="w-full items-center space-y-6 rounded-lg border-2 border-dashed p-2 pb-6 lg:p-6">
+        <h3 className="min-w-[520px] text-2xl font-semibold text-primary">
           Project Offer Form
         </h3>
         {offerSections.map((section, index) => (
@@ -43,7 +44,8 @@ export default function OfferMaterialSelection({
         ))}
 
         <CreateOfferSection projectId={projectId} />
-      </div>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     );
   }
 }

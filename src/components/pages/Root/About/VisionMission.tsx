@@ -1,10 +1,12 @@
 export default function VisionMission() {
   return (
-    <section id="vision-mission" className="relative space-y-12 px-36 py-24">
-      <div className="relative flex flex-col items-center gap-12 px-9 lg:flex-row lg:px-24">
-        <div className="relative flex-[1] md:block"></div>
-        <div className="flex-[2] space-y-4 pb-6 text-end">
-          <h2 className="border-r-8 border-primary pe-3 text-6xl font-semibold text-foreground">
+    <section
+      id="vision-mission"
+      className="relative space-y-12 px-9 py-24 lg:px-36"
+    >
+      <div className="relative flex flex-col gap-12 lg:flex-row lg:items-center lg:px-24">
+        <div className="flex-[2] space-y-4 pb-6 lg:text-end">
+          <h2 className="border-primary ps-3 text-4xl font-semibold text-foreground max-lg:border-l-8 md:text-5xl lg:border-r-8 lg:pe-3 lg:text-6xl">
             Visi
           </h2>
           <p className="text-3xl font-bold text-primary">
@@ -12,9 +14,9 @@ export default function VisionMission() {
           </p>
         </div>
       </div>
-      <div className="relative flex w-full gap-6 space-y-4 lg:px-24">
+      <div className="relative flex w-full flex-col gap-6 space-y-4 lg:flex-row lg:px-24">
         <div className="flex-[1] space-y-4">
-          <h2 className="border-l-8 border-primary ps-3 text-6xl font-semibold text-foreground">
+          <h2 className="border-l-8 border-primary ps-3 text-4xl font-semibold text-foreground md:text-5xl lg:text-6xl">
             Misi
           </h2>
           <p className="text-2xl font-bold">

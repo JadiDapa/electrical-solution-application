@@ -5,7 +5,7 @@ import { Pencil, ScrollText } from "lucide-react";
 export default function BuildElectricalInstallation() {
   return (
     <section
-      id="build-electric-installation"
+      id="build-electrical-installation"
       className="relative flex flex-col items-center gap-12 bg-primary/5 px-9 py-24 lg:flex-row lg:px-24"
     >
       <div className="flex-1 space-y-6 pb-6 lg:space-y-4">

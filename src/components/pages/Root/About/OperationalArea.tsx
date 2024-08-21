@@ -11,10 +11,10 @@ export default function OperationalArea() {
       className="relative flex flex-col items-center gap-12 px-9 py-24 lg:flex-row lg:px-24"
     >
       <div className="relative flex-[2] space-y-6 md:block">
-        <h2 className="border-l-8 border-primary ps-3 text-5xl font-semibold text-foreground">
+        <h2 className="border-l-8 border-primary ps-3 text-4xl font-semibold text-foreground md:text-5xl lg:text-5xl">
           Wilayah Operasional
         </h2>
-        <figure className="relative z-30 aspect-video w-[600px] overflow-hidden">
+        <figure className="relative z-30 aspect-video w-[360px] overflow-hidden md:w-[600px]">
           <Image
             src="/images/map.png"
             alt="Map area operaional"
@@ -23,7 +23,7 @@ export default function OperationalArea() {
           />
         </figure>
       </div>
-      <div className="flex-[1] space-y-4 pb-6">
+      <div className="flex-[1] space-y-4 pb-6 max-md:scale-75">
         <div className="space-y-6">
           <div className="relative w-72 rounded-3xl border border-primary bg-primary/70 py-2 pe-6 ps-20">
             <div className="absolute -left-12 -top-2 grid size-28 place-items-center rounded-full bg-primary text-background">

@@ -77,7 +77,7 @@ export const userProjectcolumn: ColumnDef<ProjectType>[] = [
       if (row.original.type === "assement") {
         return (
           <Link
-            href={`/assement/${row.original.id}`}
+            href={`/invoice/asset-management/${row.original.id}`}
             className="rounded-full bg-primary px-3 py-1 text-background"
           >
             Visit
