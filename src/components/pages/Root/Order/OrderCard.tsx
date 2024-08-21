@@ -33,14 +33,19 @@ export default function OrderCard({
   return (
     <div
       className={cn(
-        "relative space-y-4 overflow-hidden rounded-2xl border-2 bg-background p-6 py-9",
+        "relative space-y-3 overflow-hidden rounded-2xl border-2 bg-background px-4 py-6 lg:space-y-4 lg:px-6 lg:py-9",
         orderOption === name.toLowerCase() && "border-4 border-primary",
       )}
     >
-      <h3 className="text-3xl font-semibold text-primary">{name}</h3>
-      <p>Pilihan standar untuk perusahaan</p>
+      <h3 className="text-2xl font-semibold text-primary lg:text-3xl">
+        {name}
+      </h3>
+      <p>Standarize option for your company</p>
       <p className="pb-2">
-        Rp. <span className="text-5xl font-semibold text-primary">{price}</span>
+        Rp.{" "}
+        <span className="text-4xl font-semibold text-primary lg:text-[40px]">
+          {price}
+        </span>
         /tahun
       </p>
 
@@ -59,7 +64,7 @@ export default function OrderCard({
             : "hover:bg-primary hover:text-background",
         )}
       >
-        {orderOption === name.toLowerCase() ? "Dipilih" : "Ganti Pilihan"}
+        {orderOption === name.toLowerCase() ? "Selected" : "Select"}
       </Button>
     </div>
   );

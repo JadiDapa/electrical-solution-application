@@ -7,6 +7,7 @@ import AssementCard from "./AssementCard";
 const assetData = [
   {
     level: "Bronze",
+    price: "17,500,000",
     menu: [
       {
         title: "Mapping Data Asset",
@@ -117,6 +118,7 @@ const assetData = [
   },
   {
     level: "Silver",
+    price: "22,500,000",
     menu: [
       {
         title: "Mapping Data Asset",
@@ -227,6 +229,7 @@ const assetData = [
   },
   {
     level: "Gold",
+    price: "35,000,000",
     menu: [
       {
         title: "Mapping Data Asset",
@@ -347,16 +350,21 @@ export default function AssetManagement() {
         pathname === "/" && "bg-primary/5",
       )}
     >
-      <h2 className="border-primary ps-3 text-6xl font-semibold text-primary">
+      <h2 className="border-primary ps-3 text-center text-4xl font-semibold text-primary md:text-5xl lg:text-start lg:text-6xl">
         Asset Management
       </h2>
-      <p className="max-w-3xl text-center text-lg">
+      <p className="max-w-3xl text-center lg:text-lg">
         Paket Manajemen Aset Pelanggan Prioritas. Lorem ipsum, dolor sit amet
         consectetur adipisicing Lorem ipsum dolor sit amet!
       </p>
-      <div className="mt-12 grid w-full grid-cols-3 gap-6">
+      <div className="mt-12 grid w-full grid-cols-1 gap-6 max-lg:space-y-9 md:grid-cols-2 lg:grid-cols-3">
         {assetData.map((item) => (
-          <AssementCard key={item.level} level={item.level} menu={item.menu} />
+          <AssementCard
+            key={item.level}
+            level={item.level}
+            menu={item.menu}
+            price={item.price}
+          />
         ))}
       </div>
     </section>

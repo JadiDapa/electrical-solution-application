@@ -17,10 +17,15 @@ interface Menu {
 
 interface AssementCardProps {
   level: string;
+  price: string;
   menu: Menu[];
 }
 
-export default function AssementCard({ level, menu }: AssementCardProps) {
+export default function AssementCard({
+  level,
+  menu,
+  price,
+}: AssementCardProps) {
   return (
     <div
       key={level}
@@ -37,7 +42,8 @@ export default function AssementCard({ level, menu }: AssementCardProps) {
       <h3 className="text-3xl font-semibold text-primary">{level}</h3>
       <p>Pilihan standar untuk perusahaan</p>
       <p className="pb-2">
-        Rp. <span className="text-5xl font-semibold text-primary">24.990</span>
+        Rp.{" "}
+        <span className="text-[40px] font-semibold text-primary">{price}</span>
         /tahun
       </p>
       <Link href={`/order/assement?option=${level.toLowerCase()}`}>

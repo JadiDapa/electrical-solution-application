@@ -90,26 +90,26 @@ export default function ProductCoreBusiness() {
   return (
     <section
       id="product-core-business"
-      className="relative flex flex-col items-center gap-12 bg-primary/5 px-9 py-24 lg:flex-row lg:px-24"
+      className="relative flex flex-col gap-12 bg-primary/5 px-9 py-24 lg:flex-row lg:items-center lg:px-24"
     >
-      <div className="flex-[1] space-y-6">
-        <h2 className="border-l-8 border-primary ps-3 text-6xl font-semibold text-foreground">
+      <div className="space-y-6 lg:flex-[1]">
+        <h2 className="border-l-8 border-primary ps-3 text-4xl font-semibold text-foreground md:text-5xl lg:text-6xl">
           Product
           <span className="flex items-end gap-4">
             Core
-            <div className="grid size-12 place-items-center rounded-full bg-primary/60 p-2 text-background shadow-lg">
-              <BriefcaseBusiness />
+            <div className="grid size-9 place-items-center rounded-full bg-primary/60 p-2 text-background shadow-lg md:size-10 lg:size-12">
+              <BriefcaseBusiness className="size-5 lg:size-6" />
             </div>
           </span>
           Business
         </h2>
-        <p className="">
+        <p className="max-w-sm text-end text-sm md:text-start lg:text-base">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam
           libero non minus, Lorem ipsum dolor sit!
         </p>
       </div>
 
-      <div className="grid w-full flex-[2] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:flex-[2] lg:grid-cols-3">
         {productData.map((item, id) => (
           <div
             key={id}
@@ -133,7 +133,7 @@ export default function ProductCoreBusiness() {
           </div>
         ))}
       </div>
-      <figure className="absolute right-12 top-12 -z-10 size-80 opacity-20">
+      <figure className="absolute right-8 top-36 -z-10 size-52 opacity-10 md:size-64 lg:right-12 lg:top-12 lg:size-80 lg:opacity-20">
         <Image
           src="/images/dots-dark.svg"
           alt="Dots Svg"

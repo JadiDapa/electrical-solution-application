@@ -12,31 +12,27 @@ const resourcesLinks = [
     link: "/product",
   },
   {
-    label: "Categories",
-    link: "/categories",
+    label: "About",
+    link: "/about",
   },
   {
     label: "Contact",
     link: "/contact",
   },
-  {
-    label: "About",
-    link: "/about",
-  },
 ];
 
 const categoryLink = [
   {
-    label: "Headphone",
-    link: "/",
+    label: "Assement",
+    link: "/products#asset-management",
   },
   {
-    label: "Speaker",
-    link: "/product",
+    label: "Drawing",
+    link: "/products/#build-electrical-installation",
   },
   {
-    label: "Earbuds",
-    link: "/categories",
+    label: "Manual Calculation",
+    link: "/products/#build-electrical-installation",
   },
 ];
 
@@ -140,7 +136,7 @@ export default function Footer() {
         <hr />
         <div className="flex w-full justify-center">
           <small className="text-base font-medium text-primary-foreground">
-            &copy; Copyright 2024 BEATS. All rights reserved.
+            &copy; Copyright 2024 PLN Haleyora Power . All rights reserved.
           </small>
         </div>
       </div>

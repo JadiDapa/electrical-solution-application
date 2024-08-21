@@ -1,10 +1,20 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { hash } from "bcryptjs";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const result = await prisma.user.findMany();
+    const result = await prisma.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        _count: {
+          select: { UserProjects: true, UnitProjects: true },
+        },
+      },
+    });
+
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
     return NextResponse.json(
@@ -14,7 +24,7 @@ export async function GET() {
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const { name, email, password } = await req.json();
 

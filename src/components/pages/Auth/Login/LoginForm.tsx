@@ -46,12 +46,12 @@ export default function LoginForm() {
       const response = await signIn("credentials", {
         email,
         password,
+        redirect: false,
       });
 
       if (response?.ok) {
         toast.success("Selamat Datang di ELSA!");
-        router.push("/");
-        router.refresh();
+        router.back();
       } else {
         toast.error("Email atau password salah!");
       }

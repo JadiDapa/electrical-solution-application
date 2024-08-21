@@ -8,6 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Calculator, PencilRuler, Presentation } from "lucide-react";
+import Link from "next/link";
 
 export function BEIModal() {
   return (
@@ -27,7 +28,10 @@ export function BEIModal() {
             Silahkan memilih salah satu metode untuk memesan produk kami!
           </DialogDescription>
           <div className="flex gap-4 pt-6">
-            <div className="group flex-1 cursor-pointer space-y-2 rounded-xl border-2 border-primary px-3 py-6 transition-all duration-300 hover:bg-primary hover:text-background">
+            <Link
+              href={`/order/build-electrical-installation?option=drawing`}
+              className="group flex-1 cursor-pointer space-y-2 rounded-xl border-2 border-primary px-3 py-6 transition-all duration-300 hover:bg-primary hover:text-background"
+            >
               <Presentation
                 size={32}
                 className="text-primary/70 transition-all duration-300 group-hover:text-background"
@@ -38,8 +42,11 @@ export function BEIModal() {
               <p className="text-base font-medium">
                 Pemetaan asset listrik berupa visualisasi single line diagram
               </p>
-            </div>
-            <div className="group flex-1 cursor-pointer space-y-2 rounded-xl border-2 border-primary px-3 py-6 transition-all duration-300 hover:bg-primary hover:text-background">
+            </Link>
+            <Link
+              href={`/order/build-electrical-installation?option=manual-calculation`}
+              className="group flex-1 cursor-pointer space-y-2 rounded-xl border-2 border-primary px-3 py-6 transition-all duration-300 hover:bg-primary hover:text-background"
+            >
               <Calculator
                 size={32}
                 className="text-primary/70 transition-all duration-300 group-hover:text-background"
@@ -51,7 +58,7 @@ export function BEIModal() {
                 Perhitungan aset listrik dengan menginputkan manual aset yang
                 dibutuhkan
               </p>
-            </div>
+            </Link>
           </div>
         </DialogHeader>
       </DialogContent>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 
@@ -13,6 +12,7 @@ export default function AboutHeader() {
         alt="Product header background image"
         fill
         className="absolute -z-10 object-cover object-top brightness-[30%]"
+        loading="eager"
       />
       <h3 className="max-w-4xl text-center text-2xl font-bold text-yellow-300">
         PLN Haleyora Power

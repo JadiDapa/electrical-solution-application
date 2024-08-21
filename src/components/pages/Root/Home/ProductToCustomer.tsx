@@ -58,9 +58,9 @@ export default function ProductToCustomer() {
   return (
     <section
       id="product-core-business"
-      className="relative flex flex-col items-center gap-12 bg-primary/5 px-9 py-24 lg:flex-row lg:px-24"
+      className="relative flex flex-col gap-12 bg-primary/5 px-9 py-24 lg:flex-row lg:items-center lg:px-24"
     >
-      <div className="grid w-full flex-[2] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="order-2 grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:order-1 lg:flex-[2] lg:grid-cols-3">
         {productData.map((item, id) => (
           <div
             key={id}
@@ -78,19 +78,19 @@ export default function ProductToCustomer() {
             <h3 className="absolute bottom-2 right-2 text-end text-2xl font-medium text-slate-200 transition-all duration-300 group-hover:opacity-0">
               {item.title}
             </h3>
-            <div className="absolute left-0 top-0 h-full w-full translate-y-full bg-primary px-4 py-6 text-sm text-white transition-all duration-500 ease-out group-hover:translate-y-0">
+            <div className="absolute left-0 top-0 h-full w-full translate-y-full bg-black/50 px-4 py-6 text-sm text-white transition-all duration-500 ease-out group-hover:translate-y-0">
               {item.detail}
             </div>
           </div>
         ))}
       </div>
-      <div className="flex-[1] space-y-6">
-        <h2 className="border-l-8 border-primary ps-3 text-6xl font-semibold text-foreground">
-          Product To
+      <div className="order-1 space-y-6 lg:order-2 lg:flex-[1]">
+        <h2 className="flex flex-col items-end border-primary pe-3 text-4xl font-semibold text-foreground max-lg:border-r-8 md:text-5xl lg:items-start lg:border-l-8 lg:ps-3 lg:text-start lg:text-6xl">
+          <span className="">Product To</span>
           <span className="flex items-end gap-4">
             Customer
-            <div className="grid size-12 place-items-center rounded-full bg-primary/60 p-2 text-background shadow-lg">
-              <User />
+            <div className="grid size-9 place-items-center rounded-full bg-primary/60 p-2 text-background shadow-lg md:size-10 lg:size-12">
+              <User className="size-5 lg:size-6" />
             </div>
           </span>
         </h2>
@@ -99,7 +99,7 @@ export default function ProductToCustomer() {
           libero non minus, Lorem ipsum dolor sit!
         </p>
       </div>
-      <figure className="absolute left-12 top-12 -z-10 size-80 opacity-20">
+      <figure className="absolute left-12 top-12 -z-10 size-64 opacity-20 md:size-72 lg:size-80">
         <Image
           src="/images/dots-dark.svg"
           alt="Dots Svg"

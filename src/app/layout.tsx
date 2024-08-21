@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import AuthProvider from "@/provider/AuthProvider";
+import QueryProvider from "@/provider/QueryProvider";
 
 const manrope = Manrope({ subsets: ["latin"] });
 
@@ -23,8 +24,10 @@ export default function RootLayout({
       </head>
       <body className={manrope.className}>
         <AuthProvider>
-          <Toaster richColors position="top-right" theme="light" />
-          {children}
+          <QueryProvider>
+            <Toaster richColors position="top-right" theme="light" />
+            {children}
+          </QueryProvider>
         </AuthProvider>
       </body>
     </html>

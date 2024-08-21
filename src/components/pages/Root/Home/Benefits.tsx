@@ -37,28 +37,28 @@ const benefitData = [
 export default function Benefits() {
   return (
     <section id="benefits" className="relative space-y-20 px-9 py-24 lg:px-24">
-      <div className="flex items-end justify-between">
-        <h2 className="border-l-8 border-primary ps-3 text-6xl font-semibold text-foreground">
+      <div className="flex flex-col space-y-6 lg:flex-row lg:items-end lg:justify-between">
+        <h2 className="border-l-8 border-primary ps-3 text-5xl font-semibold text-foreground lg:text-6xl">
           Benefits
         </h2>
-        <p className="max-w-md text-end">
+        <p className="max-w-md text-end text-sm lg:text-start lg:text-base">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores iure
           distinctio quisquam!
         </p>
       </div>
 
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-1 max-md:space-y-6 md:grid-cols-2 lg:grid-cols-4">
         {benefitData.map((item, index) => (
           <div key={item.title} className="flex">
             {index !== 0 && (
               <Separator
                 orientation="vertical"
-                className="my-auto h-1/2 w-0.5"
+                className="my-auto hidden h-1/2 w-0.5 lg:block"
               />
             )}
             <div
               className={cn(
-                "space-y-6 px-5",
+                "space-y-2 md:space-y-4 lg:space-y-6 lg:px-5",
                 index === 0 && "pl-0",
                 index === benefitData.length - 1 && "pr-0",
               )}
@@ -67,10 +67,10 @@ export default function Benefits() {
                 <item.Icon size={80} />
               </div>
               <div className="space-y-3">
-                <h4 className="text-2xl font-semibold text-primary">
+                <h4 className="text-xl font-semibold text-primary lg:text-2xl">
                   {item.title}
                 </h4>
-                <p className="text-[15px]">{item.description}</p>
+                <p className="text-sm lg:text-[15px]">{item.description}</p>
               </div>
             </div>
           </div>

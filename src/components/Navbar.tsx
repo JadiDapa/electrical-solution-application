@@ -6,9 +6,10 @@ import MobileNav from "./MobileNav";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { DoorOpen, LogIn } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { LogIn, LogOut } from "lucide-react";
+import { toast } from "sonner";
 
 const links = [
   {
@@ -18,10 +19,6 @@ const links = [
   {
     name: "Products",
     path: "/products",
-  },
-  {
-    name: "Categories",
-    path: "/categories",
   },
   {
     name: "About",
@@ -37,6 +34,13 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const { data } = useSession();
+  const router = useRouter();
+
+  function handleLogout() {
+    router.push("/");
+    signOut();
+    toast.success("Logged Out successfully!");
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,20 +60,20 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed left-0 top-0 z-50 flex w-full items-center justify-between px-6 py-5 transition lg:px-24",
+        "fixed left-0 top-0 z-50 flex w-full items-center justify-between px-6 py-3 transition lg:px-24 lg:py-5",
         { "bg-stone-50 shadow-sm": isScrolled },
       )}
     >
-      <figure className="relative h-8 w-12 lg:h-12 lg:w-28">
+      <figure className="relative h-12 w-40 lg:h-14 lg:w-48">
         <Image
-          src="/images/logo.png"
+          src="/images/logo-pln-hp.png"
           alt="Logo"
           fill
-          className="object-contain"
+          className="object-contain object-center lg:object-bottom"
         />
       </figure>
       <div className="block lg:hidden">
-        <MobileNav navItems={links} />
+        <MobileNav links={links} />
       </div>
 
       <div className="hidden items-center gap-6 lg:flex">
@@ -80,8 +84,12 @@ export default function Navbar() {
             className={cn(
               "border-b-2 border-transparent text-lg text-muted-foreground transition hover:border-primary",
               pathname === link.path
-                ? "font-semibold text-primary"
-                : "text-muted-foreground",
+                ? "font-bold text-primary"
+                : "font-medium text-muted-foreground",
+              pathname !== "/" &&
+                pathname !== link.path &&
+                !isScrolled &&
+                "text-white",
             )}
           >
             {link.name}
@@ -89,14 +97,24 @@ export default function Navbar() {
         ))}
         <div className="hidden items-center gap-3 lg:flex">
           {data?.user ? (
-            <Link href="/dashboard">
+            <>
+              <Link href="/dashboard">
+                <Button
+                  variant="outline"
+                  className="rounded-full border-2 border-primary bg-transparent px-9 text-primary hover:bg-primary hover:text-background"
+                >
+                  Dashboard
+                </Button>
+              </Link>
+
               <Button
+                onClick={handleLogout}
                 variant="outline"
-                className="rounded-full border-2 border-primary bg-transparent px-9 text-primary hover:bg-primary hover:text-background"
+                className="rounded-full border-2 border-primary bg-transparent p-4 text-primary hover:bg-primary hover:text-background"
               >
-                Dashboard
+                <LogOut />
               </Button>
-            </Link>
+            </>
           ) : (
             <Link href="/login">
               <Button

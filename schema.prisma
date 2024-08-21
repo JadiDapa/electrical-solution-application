@@ -1,42 +1,42 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
- 
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
- 
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique @map("session_token")
   userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@map("sessions")
 }
- 
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -44,17 +44,136 @@ model User {
   emailVerified DateTime? @map("email_verified")
   password      String
   image         String?
+  role          String    @default("user")
   accounts      Account[]
   sessions      Session[]
- 
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  UnitProjects  Project[] @relation(name: "UnitHandler")
+  UserProjects  Project[] @relation(name: "UserRelation")
+
   @@map("users")
 }
- 
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
   @@map("verificationtokens")
+}
+
+model Material {
+  id              String            @id @default(cuid())
+  name            String
+  slug            String            @unique
+  image           String
+  description     String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  MaterialVariant MaterialVariant[]
+}
+
+model MaterialVariant {
+  id                  String                @id @default(cuid())
+  name                String
+  slug                String                @unique
+  unit                String
+  price               String
+  service             String?
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  Material            Material              @relation(fields: [materialId], references: [id], onDelete: Cascade)
+  materialId          String
+  MaterialCalculation MaterialCalculation[]
+  MaterialSection     MaterialSection[]
+}
+
+model MaterialCalculation {
+  id                String          @id @default(cuid())
+  MaterialVariant   MaterialVariant @relation(fields: [materialVariantId], references: [id], onDelete: Cascade)
+  materialVariantId String
+  Project           Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId         String
+  quantity          Int
+  status            String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
+
+model Project {
+  id                  String                @id @default(cuid())
+  type                String
+  level               String?
+  name                String
+  phone_number        String
+  address             String
+  city                String
+  province            String
+  instance            String
+  rates               String
+  power               String
+  needs               String
+  status              String
+  evidence            String
+  price               String
+  unit_handler        String
+  drawing             String?
+  Unit                User                  @relation(name: "UnitHandler", fields: [unit_handler], references: [id], onDelete: Cascade)
+  userId              String
+  User                User                  @relation(name: "UserRelation", fields: [userId], references: [id], onDelete: Cascade)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  MaterialCalculation MaterialCalculation[]
+  Evidence            Evidence[]
+  Offer               Offer?
+  OfferSection        OfferSection[]
+  MaterialSection     MaterialSection[]
+}
+
+model Evidence {
+  id        String   @id @unique @default(cuid())
+  projectId String
+  Project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type      String
+  evidence  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Offer {
+  id        String   @id @unique @default(cuid())
+  projectId String   @unique
+  Project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  customer  String
+  address   String
+  quote     String
+  validity  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OfferSection {
+  id              String            @id @unique @default(cuid())
+  projectId       String
+  Project         Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title           String
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  MaterialSection MaterialSection[]
+}
+
+model MaterialSection {
+  id              String          @id @unique @default(cuid())
+  variantId       String
+  MaterialVariant MaterialVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  offerId         String
+  OfferSection    OfferSection    @relation(fields: [offerId], references: [id], onDelete: Cascade)
+  projectId       String
+  Project         Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  quantity        Int
+  useService      String?         @default("false")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 }

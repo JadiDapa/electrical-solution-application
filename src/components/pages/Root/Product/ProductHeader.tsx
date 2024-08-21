@@ -15,6 +15,7 @@ export default function ProductHeader() {
         alt="Product header background image"
         fill
         className="absolute -z-10 object-cover object-top brightness-[30%]"
+        loading="eager"
       />
       <h2 className="flex min-w-fit items-center gap-3 rounded-full bg-sky-50 px-4 py-1.5 text-sm text-primary ring-2 ring-primary">
         <Zap size={20} />
@@ -23,12 +24,12 @@ export default function ProductHeader() {
       <h1 className="max-w-4xl text-center text-4xl font-bold text-background md:text-5xl lg:text-7xl/none">
         Electrical Solution <span className="text-primary">Product</span>
       </h1>
-      <p className="max-w-3xl text-center text-lg text-background">
+      <p className="max-w-3xl text-center text-background lg:text-lg">
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim voluptas
         dignissimos ab iusto nemo inventore temporibus? Lorem ipsum dolor sit
         amet consectetur adipisicing.
       </p>
-      <div className="mx-auto flex max-w-fit items-center gap-6">
+      <div className="mx-auto flex max-w-fit flex-col items-center gap-6 lg:flex-row">
         <Link href={"/tentang/profil"}>
           <Button className="rounded-full border border-transparent px-6 transition hover:border-primary hover:bg-transparent hover:text-primary">
             Assets Management
