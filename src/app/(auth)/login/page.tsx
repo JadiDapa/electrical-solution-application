@@ -11,10 +11,10 @@ export default function LoginPage() {
     >
       <section
         id="login-form"
-        className="flex-[1] px-8 py-20 sm:px-32 lg:px-24"
+        className="flex-[1] px-8 py-20 text-background sm:px-32 lg:px-24 lg:text-foreground"
       >
         <Link href="/" className="flex items-center gap-2">
-          <div className="grid size-8 place-items-center rounded-full bg-white shadow-lg">
+          <div className="grid size-8 place-items-center rounded-full shadow-lg lg:bg-white">
             <ArrowLeft size={20} />
           </div>
           <div className="text-lg font-semibold">Back</div>
@@ -48,14 +48,14 @@ export default function LoginPage() {
           alt="insects"
           width={160}
           height={80}
-          className="absolute right-10 top-10 z-20 object-cover object-center"
+          className="absolute right-10 top-10 z-20 hidden object-cover object-center lg:block"
         />
 
         <Image
           src={"/images/auth-image.png"}
           alt="insects"
           fill
-          className="-z-10 object-cover object-center brightness-[50%]"
+          className="-z-10 object-cover object-center brightness-[25%] lg:brightness-[50%]"
         />
       </section>
     </section>

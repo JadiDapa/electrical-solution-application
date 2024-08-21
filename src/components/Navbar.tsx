@@ -73,7 +73,11 @@ export default function Navbar() {
         />
       </figure>
       <div className="block lg:hidden">
-        <MobileNav links={links} />
+        <MobileNav
+          links={links}
+          isLogin={data?.user.id}
+          handleLogout={handleLogout}
+        />
       </div>
 
       <div className="hidden items-center gap-6 lg:flex">

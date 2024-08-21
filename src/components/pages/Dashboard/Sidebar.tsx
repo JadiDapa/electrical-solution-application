@@ -10,10 +10,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import {
   Box,
-  ChartLine,
   ChevronRight,
   CircleDashed,
-  FolderKanban,
   FolderOpenDot,
   Home,
   NotepadText,

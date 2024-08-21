@@ -8,21 +8,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { LogIn, LogOut, Menu } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Session } from "@prisma/client";
 
 type Props = {
   links: {
     name: string;
     path: string;
   }[];
+  isLogin?: string;
+  handleLogout: () => void;
 };
 
-export default function NavbarMobile({ links }: Props) {
+export default function NavbarMobile({ links, isLogin, handleLogout }: Props) {
   const pathname = usePathname();
 
   return (
@@ -61,17 +64,33 @@ export default function NavbarMobile({ links }: Props) {
                 </SheetClose>
               ))}
             </div>
-            <div className="mt-8 flex flex-col gap-4">
-              <Button
-                variant={"outline"}
-                className="rounded-md border-primary bg-transparent px-9 text-primary hover:bg-primary hover:text-background"
-              >
-                Dashboard
-              </Button>
-              <Button className="rounded-md border border-transparent bg-primary px-9 text-background hover:border-primary hover:bg-transparent hover:text-primary">
-                Log Out
-              </Button>
-            </div>
+
+            {isLogin ? (
+              <div className="mt-8 flex gap-2">
+                <Link href="/dashboard" className="w-full">
+                  <Button className="w-full rounded-full border p-2 hover:border-primary hover:bg-transparent hover:text-primary">
+                    Dashboard
+                  </Button>
+                </Link>
+
+                <Button
+                  variant="outline"
+                  onClick={handleLogout}
+                  className="w-full rounded-full p-2 text-primary hover:border-primary hover:bg-primary hover:text-white"
+                >
+                  Log Out
+                </Button>
+              </div>
+            ) : (
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  className="mt-8 flex w-full items-center gap-3 rounded-full border-2 border-primary bg-transparent px-9 text-base text-primary hover:bg-primary hover:text-background"
+                >
+                  Login
+                </Button>
+              </Link>
+            )}
           </div>
         </SheetHeader>
       </SheetContent>

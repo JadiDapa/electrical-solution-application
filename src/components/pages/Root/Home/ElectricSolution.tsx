@@ -10,8 +10,8 @@ export default function ElectricSolution() {
       <div className="relative flex-1 md:block">
         <figure className="relative z-10 h-[380px] w-[320px] overflow-hidden lg:h-[420px] lg:w-[380px]">
           <Image
-            src="/images/hero.png"
-            alt="Hero Image"
+            src="/images/paagung.png"
+            alt="paagung Image"
             fill
             className="object-contain object-bottom"
           />
