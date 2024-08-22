@@ -1,8 +1,8 @@
 import { Separator } from "@/components/ui/separator";
-import { auth } from "@/lib/auth";
 import { getProjectById } from "@/lib/network/project";
 import { ArrowLeftCircle, Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
+import { auth } from "@/auth";
 
 export default async function Invoice({ params }: { params: { id: string } }) {
   const project = await getProjectById(params.id);

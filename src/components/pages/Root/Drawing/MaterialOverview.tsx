@@ -13,6 +13,7 @@ import {
   ChevronRightCircle,
   Eye,
   Plus,
+  X,
 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -24,6 +25,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { getOfferByProjectId } from "@/lib/network/offer";
 import { MaterialCalculationType } from "@/lib/type/material-calculation";
+import { Scrollbar } from "@radix-ui/react-scroll-area";
 
 interface ResultType {
   [key: string]: {
@@ -105,7 +107,7 @@ export default function MaterialOverview() {
     <div
       className={cn(
         "absolute top-8 z-50 flex items-center space-y-1.5 overflow-hidden rounded-s-md drop-shadow-md transition-all duration-700 lg:top-20",
-        isOpen ? "right-0" : "lg:-right-[480px]",
+        isOpen ? "right-0" : "-right-[100vw] lg:-right-[480px]",
       )}
     >
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -134,7 +136,10 @@ export default function MaterialOverview() {
           <ChevronLeft className="w-6" />
         )}
       </div>
-      <ScrollArea className="relative h-[520px] w-[480px] rounded-s-md bg-white px-3 py-5">
+      <ScrollArea className="relative h-[520px] w-[100vw] rounded-s-md bg-white px-3 py-5 lg:w-[480px]">
+        <div onClick={() => setIsOpen(!isOpen)} className="">
+          <X className="w-6 text-primary lg:hidden" />
+        </div>
         <h2 className="text-center text-xl font-semibold text-primary">
           Project Overview
         </h2>
@@ -155,7 +160,6 @@ export default function MaterialOverview() {
             <p>Rp {totalPaid.toLocaleString()}</p>
           </div>
         </div>
-
         <div className="mt-6 flex items-center justify-between">
           <h3 className="text-lg font-semibold">Material Listed</h3>
           <AddMaterialModal materials={materials || []} projectId={projectId}>
@@ -164,7 +168,6 @@ export default function MaterialOverview() {
             </Button>
           </AddMaterialModal>
         </div>
-
         <div className="mt-3 flex flex-col gap-3 divide-y">
           {remapMaterial?.map((material) => (
             <MaterialItem
@@ -198,6 +201,7 @@ export default function MaterialOverview() {
             </p>
           </Link>
         )}
+        <Scrollbar orientation="horizontal" />
       </ScrollArea>
     </div>
   );

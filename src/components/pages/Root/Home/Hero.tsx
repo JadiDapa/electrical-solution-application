@@ -55,6 +55,15 @@ export default function Hero() {
           />
         </figure>
 
+        <figure className="absolute right-0 top-10 h-16 w-36 animate-float lg:h-20 lg:w-48">
+          <Image
+            src="/images/logo-elsa-full.png"
+            alt="Logo"
+            fill
+            className="object-contain object-center lg:object-center"
+          />
+        </figure>
+
         <figure className="absolute bottom-4 right-0 size-52 lg:size-72">
           <Image
             src="/images/dots-light.svg"

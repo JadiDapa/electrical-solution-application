@@ -55,22 +55,21 @@ export default function Footer() {
   return (
     <footer
       id="footer"
-      className="bottom-0 left-0 border-t bg-primary pb-4 pt-12"
+      className="bottom-0 left-0 border-t bg-primary/90 pb-4 pt-12"
     >
       <div className="flex flex-col gap-6 px-6 lg:px-24">
         <div className="relative mx-auto flex w-full flex-col gap-6">
           <div className="flex flex-col gap-9 text-sm md:gap-20 lg:flex-row">
             <div className="flex flex-col gap-3">
-              <figure className="relative h-20 w-20 lg:w-32">
+              <figure className="relative h-20 w-20 lg:w-56">
                 <Image
-                  src={"/images/logo.png"}
-                  alt="Logo BEATS"
+                  src={"/images/logo-pln-hp.png"}
+                  alt="Logo PLN HP"
                   fill
                   className="object-contain"
                 />
               </figure>
               <div className="flex flex-col gap-1 text-primary-foreground">
-                <h4 className="text-lg font-bold">2P8J+2VQ</h4>
                 <p className="text-lg leading-relaxed tracking-wide lg:w-[68%]">
                   Kantor Pusat Gedung 19 PT PLN (Persero) Pusertif Jl.
                   Laboratorium No. 1 Kel. Duren Tiga, Kec. Pancoran, Kota

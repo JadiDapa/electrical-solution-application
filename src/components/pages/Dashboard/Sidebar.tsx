@@ -89,7 +89,7 @@ const adminLink = [
 ];
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { data } = useSession();
   const userRole = data?.user.role;

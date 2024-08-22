@@ -1,17 +1,10 @@
 import ConnectedCard from "@/components/pages/Dashboard/ConnectedCard";
 import DashboardHeader from "@/components/pages/Dashboard/DashboardHeader";
 import ProjectTable from "@/components/pages/Dashboard/Projects/ProjectTable";
-import { auth } from "@/lib/auth";
 import { projectColumn } from "@/lib/column/project-column";
 import { getAllProjects } from "@/lib/network/project";
-import { getUserByEmail, getUserById } from "@/lib/network/user";
-import {
-  BarChart2,
-  Calculator,
-  MessagesSquare,
-  NotepadText,
-  Wrench,
-} from "lucide-react";
+import { Calculator, MessagesSquare, NotepadText, Wrench } from "lucide-react";
+import { auth } from "@/auth";
 
 export default async function AssignedProjectDashboard({
   params,

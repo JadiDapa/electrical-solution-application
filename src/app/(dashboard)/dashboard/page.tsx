@@ -1,11 +1,11 @@
 import DashboardHeader from "@/components/pages/Dashboard/DashboardHeader";
 import ProjectTable from "@/components/pages/Dashboard/Projects/ProjectTable";
 import { Button } from "@/components/ui/button";
-import { auth } from "@/lib/auth";
 import { userProjectcolumn } from "@/lib/column/user-project-column";
 import { getProjectsByUserId } from "@/lib/network/project";
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "@/auth";
 
 export default async function Dashboard() {
   const session = await auth();

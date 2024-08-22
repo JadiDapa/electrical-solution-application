@@ -1,10 +1,10 @@
 import ConnectedCard from "@/components/pages/Dashboard/ConnectedCard";
 import DashboardHeader from "@/components/pages/Dashboard/DashboardHeader";
 import ProjectTable from "@/components/pages/Dashboard/Projects/ProjectTable";
-import { auth } from "@/lib/auth";
 import { userProjectcolumn } from "@/lib/column/user-project-column";
 import { getProjectsByUserId } from "@/lib/network/project";
 import { Calculator, MessagesSquare, NotepadText, Wrench } from "lucide-react";
+import { auth } from "@/auth";
 
 export default async function AssetManagementDashboard() {
   const session = await auth();
