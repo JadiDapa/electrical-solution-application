@@ -65,9 +65,9 @@ model VerificationToken {
 }
 
 model Material {
-  id              String            @id @default(cuid())
+  id              String            @id @unique @default(cuid())
   name            String
-  slug            String            @unique
+  slug            String
   image           String
   description     String?
   createdAt       DateTime          @default(now())
@@ -76,9 +76,9 @@ model Material {
 }
 
 model MaterialVariant {
-  id                  String                @id @default(cuid())
+  id                  String                @id @unique @default(cuid())
   name                String
-  slug                String                @unique
+  slug                String
   unit                String
   price               String
   service             String?
@@ -91,7 +91,7 @@ model MaterialVariant {
 }
 
 model MaterialCalculation {
-  id                String          @id @default(cuid())
+  id                String          @id @unique @default(cuid())
   MaterialVariant   MaterialVariant @relation(fields: [materialVariantId], references: [id], onDelete: Cascade)
   materialVariantId String
   Project           Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
@@ -103,7 +103,7 @@ model MaterialCalculation {
 }
 
 model Project {
-  id                  String                @id @default(cuid())
+  id                  String                @id @unique @default(cuid())
   type                String
   level               String?
   name                String
