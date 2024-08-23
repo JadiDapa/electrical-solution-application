@@ -23,6 +23,8 @@ import { Input } from "@/components/ui/input";
 import slugify from "slugify";
 import { useRouter } from "next/navigation";
 import { createMaterial } from "@/lib/network/material";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CreateMaterialType } from "@/lib/type/material";
 
 type CreateMaterialModalProps = {
   children?: ReactNode;
@@ -39,7 +41,7 @@ export default function CreateMaterialModal({
 }: CreateMaterialModalProps) {
   const [image, setImage] = useState<File>();
   const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const queryClient = useQueryClient();
 
   function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const picture = e.target.files?.[0];
@@ -60,25 +62,25 @@ export default function CreateMaterialModal({
     form.setValue("slug", slugValue);
   }
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const result = await createMaterial({
-        ...values,
-        image: image!,
-      });
+  const { mutate: onCreateMaterial } = useMutation({
+    mutationFn: (values: CreateMaterialType) => createMaterial(values),
+    onSuccess: () => {
+      setOpen(false);
+      toast.success("Material Added!");
+      queryClient.invalidateQueries({ queryKey: ["materials"] });
+    },
+    onError: () => {
+      toast.error("Something went wrong!");
+    },
+  });
 
-      if (result) {
-        setOpen(!open);
-        toast.success("New Material Created!");
-        router.refresh();
-      } else {
-        toast.error("Failed To Create Material! Check Your Inputs");
-      }
-    } catch (error) {
-      toast.error("Something Went Wrong!");
-      console.log(error);
-    }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await onCreateMaterial({
+      ...values,
+      image: image!,
+    });
   }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{children}</DialogTrigger>

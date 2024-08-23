@@ -54,7 +54,6 @@ export default function CreateUserModal({ children }: CreateUserModalProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       setOpen(false);
-      router.refresh();
       toast.success("User Created!");
     },
     onError: (error) => {

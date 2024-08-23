@@ -50,7 +50,6 @@ export default function UpdateUserModal({
   const [image, setImage] = useState<File>();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const picture = e.target.files?.[0];
@@ -71,7 +70,6 @@ export default function UpdateUserModal({
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       setOpen(false);
-      router.refresh();
       toast.success("User updated!");
     },
     onError: (error) => {

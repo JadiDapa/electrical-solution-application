@@ -89,6 +89,7 @@ export const materialVariantColumn: ColumnDef<MaterialVariantType>[] = [
             <DeleteModal
               params={row.original.id}
               deleteFunction={deleteMaterialVariant}
+              queryKey="material-variants"
             />
           </PopoverContent>
         </Popover>

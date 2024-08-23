@@ -15,33 +15,37 @@ import {
 import { toast } from "sonner";
 import { TailSpin } from "react-loader-spinner";
 import { useRouter } from "next/navigation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type DeleteDialogProps = {
   params: string;
   deleteFunction: (params: string) => Promise<string>;
+  queryKey: string;
 };
 
 export default function DeleteModal({
   params,
   deleteFunction,
+  queryKey,
 }: DeleteDialogProps) {
-  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  const { mutate: onDelete } = useMutation({
+    mutationFn: () => deleteFunction(params),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKey] });
+      toast.success("Data Deleted!");
+    },
+    onError: (error) => {
+      toast.error("Something went wrong!");
+      console.error(error);
+    },
+  });
 
   async function handleDelete() {
-    try {
-      const result = await deleteFunction(params);
-
-      if (result) {
-        toast.success("Data Berhasil Dihapus!");
-        router.refresh();
-      } else {
-        toast.error("Terjadi kesalahan saat menghapus data");
-      }
-    } catch (error) {
-      toast.error("Terjadi Kesalahan Pada Server");
-      console.log(error);
-    }
+    await onDelete();
   }
+
   return (
     <AlertDialog>
       <AlertDialogTrigger className="text-primary">

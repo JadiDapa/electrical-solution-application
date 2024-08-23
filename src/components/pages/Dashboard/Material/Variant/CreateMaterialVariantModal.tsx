@@ -38,7 +38,8 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { MaterialType } from "@/lib/type/material";
+import { CreateMaterialVariantType } from "@/lib/type/material-variant";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 type CreateMaterialVariantModalProps = {
   children?: ReactNode;
@@ -56,16 +57,27 @@ const formSchema = z.object({
 export default function CreateMaterialVariantModal({
   children,
 }: CreateMaterialVariantModalProps) {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const [materials, setMaterials] = useState<MaterialType[] | undefined>();
   const router = useRouter();
 
-  useEffect(() => {
-    (async () => {
-      const material = await getAllMaterials();
-      setMaterials(material);
-    })();
-  }, []);
+  const { data: materials } = useQuery({
+    queryFn: getAllMaterials,
+    queryKey: ["materials"],
+  });
+
+  const { mutate: onCreateVariant } = useMutation({
+    mutationFn: (values: CreateMaterialVariantType) =>
+      createMaterialVariant(values),
+    onSuccess: () => {
+      setOpen(false);
+      toast.success("Material Added!");
+      queryClient.invalidateQueries({ queryKey: ["material-variants"] });
+    },
+    onError: () => {
+      toast.error("Something went wrong!");
+    },
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -85,21 +97,9 @@ export default function CreateMaterialVariantModal({
   }
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const result = await createMaterialVariant(values);
-
-      if (result) {
-        setOpen(!open);
-        toast.success("New Material Created!");
-        router.refresh();
-      } else {
-        toast.error("Failed To Create Material! Check Your Inputs");
-      }
-    } catch (error) {
-      toast.error("Something Went Wrong!");
-      console.log(error);
-    }
+    await onCreateVariant(values);
   }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{children}</DialogTrigger>

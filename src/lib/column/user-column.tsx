@@ -101,7 +101,11 @@ export const userColumn: ColumnDef<UserType>[] = [
             <UpdateUserModal user={row.original}>
               <Pencil size={20} className="cursor-pointer" />
             </UpdateUserModal>
-            <DeleteModal params={row.original.id} deleteFunction={deleteUser} />
+            <DeleteModal
+              params={row.original.id}
+              deleteFunction={deleteUser}
+              queryKey="users"
+            />
           </PopoverContent>
         </Popover>
       </div>

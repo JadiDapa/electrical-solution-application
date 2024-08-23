@@ -77,7 +77,7 @@ export default function AddMaterialModal({
         setVariant(mainMaterial.MaterialVariant);
       }
     }
-  }, [[form, materials]]);
+  }, [form, materials]);
 
   const { mutate: onCreateCalculation } = useMutation({
     mutationFn: (values: CreateMaterialCalculationType) =>

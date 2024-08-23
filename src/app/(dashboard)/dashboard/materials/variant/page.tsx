@@ -9,7 +9,7 @@ import { BarChart2 } from "lucide-react";
 export default function MaterialVariant() {
   const { data: materialVariants } = useQuery({
     queryFn: () => getAllMaterialVariants(),
-    queryKey: ["materialVariants"],
+    queryKey: ["material-variants"],
   });
 
   if (materialVariants) {
