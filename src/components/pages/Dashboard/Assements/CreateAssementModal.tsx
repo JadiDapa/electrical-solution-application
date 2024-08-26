@@ -24,44 +24,36 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateUserType } from "@/lib/type/user";
 import { createUser } from "@/lib/network/user";
 import { useRouter } from "next/navigation";
-import {
-  SelectItem,
-  Select,
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { createAssement } from "@/lib/network/assement";
+import { CreateAssementType } from "@/lib/type/assement";
 
-interface CreateUserModalProps {
+interface CreateAssementModalProps {
   children?: ReactNode;
 }
 
 const formSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().min(1),
-  role: z.string().min(1),
-  password: z.string().min(1),
+  title: z.string().min(1),
+  price: z.string().min(1),
 });
 
-export default function CreateUserModal({ children }: CreateUserModalProps) {
+export default function CreateAssementModal({
+  children,
+}: CreateAssementModalProps) {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      role: "",
-      password: "",
+      title: "",
+      price: "",
     },
   });
 
-  const { mutate: onCreateUser } = useMutation({
-    mutationFn: (values: CreateUserType) => createUser(values),
+  const { mutate: onCreateAssement } = useMutation({
+    mutationFn: (values: CreateAssementType) => createAssement(values),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["assements"] });
       setOpen(false);
       toast.success("User Created!");
     },
@@ -72,7 +64,7 @@ export default function CreateUserModal({ children }: CreateUserModalProps) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    onCreateUser(values);
+    onCreateAssement(values);
   }
 
   return (
@@ -81,7 +73,7 @@ export default function CreateUserModal({ children }: CreateUserModalProps) {
       <DialogContent className="font-inter">
         <DialogHeader>
           <DialogTitle className="text-3xl font-semibold text-primary">
-            Create a New User
+            Create Assement Option
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
@@ -91,12 +83,12 @@ export default function CreateUserModal({ children }: CreateUserModalProps) {
           >
             <FormField
               control={form.control}
-              name="name"
+              name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="ex: John Doe" {...field} />
+                    <Input placeholder="ex: Platinum" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,47 +96,12 @@ export default function CreateUserModal({ children }: CreateUserModalProps) {
             />
             <FormField
               control={form.control}
-              name="email"
+              name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input placeholder="ex: johndoe@gmail.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Role</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select user role" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="unit">Unit</SelectItem>
-                      <SelectItem value="user">User</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Account password" {...field} />
+                    <Input placeholder="ex: 1000000" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

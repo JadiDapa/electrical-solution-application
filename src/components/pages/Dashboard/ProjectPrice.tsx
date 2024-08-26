@@ -1,6 +1,5 @@
 import { getMaterialCalculationsByProjectId } from "@/lib/network/material-calculation";
 import { ProjectType } from "@/lib/type/project";
-import { Project } from "@prisma/client";
 import { useQuery } from "@tanstack/react-query";
 
 interface ProjectPrice {

@@ -222,7 +222,7 @@ export default function UpdateMaterialVariantModal({
                   <FormLabel>Price</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="ex: MV Trafo (AL-AL)"
+                      placeholder="ex: 1000000"
                       {...field}
                       onBlur={makeSlug}
                     />

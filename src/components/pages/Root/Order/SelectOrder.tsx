@@ -1,34 +1,6 @@
+import { getAllAssements } from "@/lib/network/assement";
 import OrderCard from "./OrderCard";
-
-const assementOption = [
-  {
-    name: "Bronze",
-    price: "17,500,000",
-  },
-  {
-    name: "Silver",
-    price: "22,500,000",
-  },
-  {
-    name: "Gold",
-    price: "35,000,000",
-  },
-];
-
-const BEIOption = [
-  {
-    name: "Bronze",
-    price: "17,500,000",
-  },
-  {
-    name: "Silver",
-    price: "22,500,000",
-  },
-  {
-    name: "Gold",
-    price: "35,000,000",
-  },
-];
+import { useQuery } from "@tanstack/react-query";
 
 interface SelectOrderProps {
   orderType: string;
@@ -39,7 +11,26 @@ export default function SelectOrder({
   orderType,
   orderOption,
 }: SelectOrderProps) {
-  const options = orderType === "assement" ? assementOption : BEIOption;
+  const { data: assements } = useQuery({
+    queryFn: () => getAllAssements(),
+    queryKey: ["assements"],
+  });
+
+  const assementOption = [
+    {
+      name: assements?.[0]?.title || "",
+      price: Number(assements?.[0]?.price).toLocaleString() || "",
+    },
+    {
+      name: assements?.[1]?.title || "",
+      price: Number(assements?.[1]?.price).toLocaleString() || "",
+    },
+    {
+      name: assements?.[2]?.title || "",
+      price: Number(assements?.[2]?.price).toLocaleString() || "",
+    },
+  ];
+
   return (
     <section
       id="select-order"
@@ -49,7 +40,7 @@ export default function SelectOrder({
         Select Preferable Option
       </h2>
       <div className="mt-12 grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {options.map((item) => (
+        {assementOption.map((item) => (
           <OrderCard
             key={item.name}
             name={item.name}

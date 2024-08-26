@@ -59,7 +59,6 @@ export default function CreateMaterialVariantModal({
 }: CreateMaterialVariantModalProps) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   const { data: materials } = useQuery({
     queryFn: getAllMaterials,
@@ -214,7 +213,7 @@ export default function CreateMaterialVariantModal({
                   <FormLabel>Price</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="ex: MV Trafo (AL-AL)"
+                      placeholder="ex: 1000000"
                       {...field}
                       onBlur={makeSlug}
                     />

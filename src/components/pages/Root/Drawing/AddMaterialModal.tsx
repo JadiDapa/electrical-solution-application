@@ -58,6 +58,7 @@ export default function AddMaterialModal({
 }: AddMaterialModalProps) {
   const [open, setOpen] = useState(false);
   const [variant, setVariant] = useState<MaterialVariantType[] | []>([]);
+  const [selected, setSelected] = useState("");
   const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -70,14 +71,11 @@ export default function AddMaterialModal({
   });
 
   useEffect(() => {
-    const main = form.getValues("materialId");
-    if (main) {
-      const mainMaterial = materials.find((item) => item.id === main);
-      if (mainMaterial) {
-        setVariant(mainMaterial.MaterialVariant);
-      }
+    const mainMaterial = materials.find((item) => item.id === selected);
+    if (mainMaterial) {
+      setVariant(mainMaterial.MaterialVariant);
     }
-  }, [form, materials]);
+  }, [selected, materials]);
 
   const { mutate: onCreateCalculation } = useMutation({
     mutationFn: (values: CreateMaterialCalculationType) =>
@@ -102,14 +100,17 @@ export default function AddMaterialModal({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{children}</DialogTrigger>
-      <DialogContent className="font-inter min-w-[720px]">
+      <DialogContent className="font-inter lg:min-w-[720px]">
         <DialogHeader>
           <DialogTitle className="text-3xl font-semibold text-primary">
             Add Material
           </DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-3">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="flex flex-col gap-3 lg:flex-row"
+          >
             <FormField
               control={form.control}
               name="materialId"
@@ -145,6 +146,7 @@ export default function AddMaterialModal({
                                 key={item.id}
                                 onSelect={() => {
                                   form.setValue("materialId", item.id);
+                                  setSelected(item.id);
                                 }}
                               >
                                 <Check

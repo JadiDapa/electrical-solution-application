@@ -177,3 +177,11 @@ model MaterialSection {
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 }
+
+model Assement {
+  id        String   @id @unique @default(cuid())
+  title     String
+  price     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

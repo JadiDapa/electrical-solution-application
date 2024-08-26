@@ -132,7 +132,9 @@ export default function ComponentVariant({
         </DialogContent>
       </Dialog>
       <p className="flex-[4]">{title}</p>
-      <p className="flex-[2] text-lg font-semibold">Rp {price}</p>
+      <p className="flex-[2] text-lg font-semibold">
+        Rp {price.toLocaleString()}
+      </p>
       <div className="flex flex-[1] items-center justify-end gap-2">
         <Button
           variant={"secondary"}

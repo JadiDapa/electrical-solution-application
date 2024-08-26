@@ -26,7 +26,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, password } = await req.json();
+    const { name, email, password, role } = await req.json();
 
     const isRegistered = await prisma.user.findUnique({
       where: { email: email },
@@ -46,6 +46,7 @@ export async function POST(req: NextRequest) {
         name,
         email,
         password: hashedPassword,
+        role: role,
       },
     });
 

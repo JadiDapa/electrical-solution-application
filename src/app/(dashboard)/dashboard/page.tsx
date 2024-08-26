@@ -57,7 +57,7 @@ export default async function Dashboard() {
             <Link href="/dashboard/build-electrical-installation">
               <Button size="sm">Projects</Button>
             </Link>
-            <Link href="/order/assement">
+            <Link href="/order/build-electrical-installation/?option=drawing">
               <Button
                 size="sm"
                 className="border-background bg-background text-primary"
@@ -83,12 +83,14 @@ export default async function Dashboard() {
             <Link href="/dashboard/build-electrical-installation">
               <Button size="sm">Projects</Button>
             </Link>
-            <Button
-              size="sm"
-              className="border-background bg-background text-primary"
-            >
-              Create
-            </Button>
+            <Link href="/order/build-electrical-installation/?option=manual-calculation">
+              <Button
+                size="sm"
+                className="border-background bg-background text-primary"
+              >
+                Create
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

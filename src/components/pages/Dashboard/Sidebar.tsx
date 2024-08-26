@@ -16,6 +16,7 @@ import {
   Home,
   NotepadText,
   SquareChartGantt,
+  UserCog2,
   Users,
   Wrench,
   X,
@@ -85,6 +86,11 @@ const adminLink = [
         url: "/dashboard/materials/variant",
       },
     ],
+  },
+  {
+    name: "Asset Management",
+    url: "/dashboard/asset-management-admin",
+    Icon: UserCog2,
   },
 ];
 

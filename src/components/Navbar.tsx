@@ -65,17 +65,17 @@ export default function Navbar() {
       )}
     >
       <div className="flex items-center gap-3 lg:gap-9">
-        <figure className="relative h-12 w-24 lg:h-16 lg:w-36">
+        <figure className="relative h-10 w-36 lg:h-14 lg:w-48">
           <Image
-            src="/images/logo-elsa-full.png"
+            src="/images/logo-pln-hp.png"
             alt="Logo"
             fill
             className="object-contain object-center lg:object-center"
           />
         </figure>
-        <figure className="relative h-10 w-36 lg:h-14 lg:w-48">
+        <figure className="relative h-12 w-24 lg:h-16 lg:w-36">
           <Image
-            src="/images/logo-pln-hp.png"
+            src="/images/logo-elsa-full.png"
             alt="Logo"
             fill
             className="object-contain object-center lg:object-center"

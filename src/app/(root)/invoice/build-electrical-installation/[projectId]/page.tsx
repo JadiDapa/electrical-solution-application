@@ -1,3 +1,6 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -10,20 +13,34 @@ import { getOfferByProjectId } from "@/lib/network/offer";
 import { getOfferSectionByProjectId } from "@/lib/network/offer-section";
 import { getProjectById } from "@/lib/network/project";
 import { convertToRoman, formatDate, getLetter } from "@/lib/utils/formatter";
+import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { ArrowLeftCircle } from "lucide-react";
+import { ArrowLeftCircle, Printer } from "lucide-react";
 import Image from "next/image";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 
-export default async function Invoice({
-  params,
-}: {
-  params: { projectId: string };
-}) {
-  const project = await getProjectById(params.projectId);
-  const offer = await getOfferByProjectId(params.projectId);
-  const offerSection = await getOfferSectionByProjectId(params.projectId);
+export default function Invoice({ params }: { params: { projectId: string } }) {
+  const invoiceRef = useRef<HTMLDivElement>(null);
+  const handlePrint = useReactToPrint({
+    content: () => invoiceRef.current,
+  });
 
-  const subtotal = offerSection.reduce(
+  const { data: project } = useQuery({
+    queryFn: () => getProjectById(params.projectId),
+    queryKey: ["project", params.projectId],
+  });
+  const { data: offer } = useQuery({
+    queryFn: () => getOfferByProjectId(params.projectId),
+    queryKey: ["offer", params.projectId],
+  });
+
+  const { data: offerSection } = useQuery({
+    queryFn: () => getOfferSectionByProjectId(params.projectId),
+    queryKey: ["offer-sections", params.projectId],
+  });
+
+  const subtotal = offerSection?.reduce(
     (acc, curr) =>
       acc +
       curr.MaterialSection.reduce(
@@ -38,23 +55,32 @@ export default async function Invoice({
     0,
   );
 
-  const ppn = (subtotal * 11) / 100;
-  const total = subtotal + ppn;
+  const ppn = ((subtotal || 0) * 11) / 100;
+  const total = (subtotal || 0) + ppn;
 
-  return (
-    <section
-      id="invoice"
-      className="relative w-full space-y-6 overflow-auto bg-primary/5 px-2 py-32 lg:px-6"
-    >
-      <div className="flex items-center gap-3 text-2xl">
-        <ArrowLeftCircle />
-        Back
-      </div>
-      <h1 className="max-w-fit border-b-4 border-primary ps-3 text-2xl font-bold text-foreground md:text-3xl lg:mx-auto lg:text-4xl">
-        Estimasi Pembayaran - Invoice
-      </h1>
-      {project && (
-        <div className="m mx-auto aspect-[9/12] w-[1200px] origin-top-left scale-[29%] space-y-12 bg-white p-12 sm:scale-[53%] md:scale-[65%] lg:scale-[85%] xl:scale-100">
+  if (project && offer && offerSection && subtotal && ppn && total) {
+    return (
+      <section
+        id="invoice"
+        className="relative w-full space-y-6 overscroll-auto bg-primary/5 px-6 py-32 lg:px-24"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3 text-2xl">
+            <ArrowLeftCircle />
+            Back
+          </div>
+          <Button className="flex items-center gap-3" onClick={handlePrint}>
+            Print Invoice <Printer strokeWidth={1.7} size={20} />
+          </Button>
+        </div>
+        <h1 className="max-w-fit border-b-4 border-primary ps-3 text-2xl font-bold text-foreground md:text-3xl lg:mx-auto lg:text-4xl">
+          Estimasi Pembayaran - Invoice
+        </h1>
+
+        <div
+          ref={invoiceRef}
+          className="mx-auto aspect-[9/12] w-[1200px] space-y-12 bg-white p-12"
+        >
           <figure className="relative h-16 w-64">
             <Image
               src="/images/logo-pln-hp.png"
@@ -281,7 +307,7 @@ export default async function Invoice({
             </div>
           </div>
         </div>
-      )}
-    </section>
-  );
+      </section>
+    );
+  }
 }

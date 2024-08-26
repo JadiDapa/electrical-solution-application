@@ -16,11 +16,8 @@ export default function Home() {
       <ElectricSolution />
       <Benefits />
       <AssetManagement />
-      <BuildElectricalInstallation />
       <ServiceScheme />
-      {/* <Assessment /> */}
-      {/* <BuildElectricalInstallation /> */}
-      {/* <CTA /> */}
+      <BuildElectricalInstallation />
     </>
   );
 }
